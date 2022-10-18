@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        let http;
+        function send(){
+            http = new XMLHttpRequest();
+            http.onreadystatechange = show;
+            let user = document.getElementById("user").value;
+            let url = "search.php?username="+user;
+
+            http.open("GET",url);
+            http.send();
+        }
+        function show(){
+            
+            if(http.readyState==4 && http.status==200){
+                // console.log(http.responseText);
+                document.getElementById("showelement").innerHTML = http.responseText;
+            }
+        }
+    </script>
+</head>
+<body>
+    Username : <input type="text" id="user" onblur="send()">
+    <div id="showelement"></div>
+</body>
+</html>
